@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
+@Data
 @Builder
-@Getter
 public class Transacao {
 
   private final BigDecimal valor;
