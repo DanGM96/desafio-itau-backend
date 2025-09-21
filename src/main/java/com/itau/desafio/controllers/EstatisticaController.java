@@ -1,9 +1,12 @@
 package com.itau.desafio.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itau.desafio.services.TransacaoService;
@@ -17,8 +20,11 @@ public class EstatisticaController {
   private TransacaoService transacaoService;
 
   @GetMapping
-  public ResponseEntity<BigDecimalSummaryStatistics> getEstatistica() {
-    return ResponseEntity.ok().body(transacaoService.getStats());
+  public ResponseEntity<BigDecimalSummaryStatistics> getEstatistica(
+      @RequestParam(name = "segundos") Optional<Long> seconds) {
+    BigDecimalSummaryStatistics stats = transacaoService.getStats(seconds);
+
+    return ResponseEntity.ok().body(stats);
   }
 
 }
